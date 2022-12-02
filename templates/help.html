@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link rel="stylesheet" type="text/css" href='https://storage.googleapis.com/workload_static/global.css'/>
+<!--<link rel="stylesheet" type="text/css" href="iphone.css" media="screen and (orientation:portrait)"/>
+<link rel="stylesheet" type="text/css" href="iphone_landscape.css" media="screen and (orientation:landscape)"/>-->
+
+</head>
+<body style="background-color:#5d86a1;">
+    <!-- Start of first page -->
+    <div data-role="page" style="background:none;">
+<div style="background-color:white; max-width:400px; min-width:380px; margin:auto; margin-top:10vh; padding:10px; border:3px solid black; border-radius:10px;">
+<div data-role="header">
+    <h1 style="margin-left:5% !important; margin-right:5% !important;" >Help and About</h1>
+</div>
+<div>
+  <h3 style="text-align:center; margin-left:5% !important; margin-right:5% !important;">Workload is an app developed to help you stay organized and on top of upcoming assignments.</h3>
+  <ul>
+    <li style="margin-bottom:5px;">To add a new assignment, go to dashboard and click add assignment then submit the following form.</li>
+    <li style="margin-bottom:5px;">To mark an assignment as completed, go to dashboard and click complete assignment.</li>
+    <li style="margin-bottom:5px;">To delete an assignment, go dashboard and click delete assignment.</li>
+    <li style="margin-bottom:5px;">To delete your account, go to settings and click delete account.</li>
+    <li style="margin-bottom:5px;">To view your completed assignments, go to settings and click view completed assignments.</li>
+
+  </ul>
+<br>
+    <p style="margin-left:5% !important; margin-right:5% !important;">If something isn't showing up refreshing will likely solve the problem.</p>
+  <br>
+  <p style="margin-left:5% !important; margin-right:5% !important;">For additional questions please email adamburich@gmail.com</p>
+  <br>
+  </div>
+<div data-role="footer">
+            <div data-role="navbar">
+            <ul>
+            <li> <a href="{{ url_for('dashboard', username=username) }}" data-icon="bars">Dashboard</a>
+            <li> <a href="{{ url_for('settings', username=username) }}" data-icon="gear">Settings</a>
+            <li> <a href="{{ url_for('logout', username=username) }}" data-icon="back">Sign Out</a>
+            </ul>
+            </div>
+        </div>
+</div></div>
+</body>
+</html>

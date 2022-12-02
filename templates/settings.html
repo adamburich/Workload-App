@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="iphone.css" media="screen and (orientation:portrait)"/>
+<link rel="stylesheet" type="text/css" href="iphone_landscape.css" media="screen and (orientation:landscape)"/>-->
+    <script>
+        $(function() {
+    $('.confirm').click(function() {
+        return window.confirm("Are you sure?");
+    });
+});
+    </script>
+</head>
+<body style="background-color:#5d86a1;">
+    <!-- Start of first page -->
+    <div data-role="page" style="background:none;">
+<div style="background-color:white; max-width:400px; min-width:380px; margin:auto; margin-top:10vh; padding:10px; border:3px solid black; border-radius:10px;">
+<div data-role="header">
+    <h1>Workload</h1>
+</div>
+<nav id="settings_nav">
+            <!-- LI stands for list item -->
+            <a id="help_button" data-role="button" href="{{ url_for('help', username=username) }}">Help</a>
+            <a id="delete_account_button" data-role="button" href="{{ url_for('delete_account', username=username) }}" class="confirm">Delete Account</a>
+            </ul>
+            </nav>
+<div data-role="footer">
+            <div data-role="navbar">
+            <ul>
+            <li> <a href="{{ url_for('dashboard', username=username) }}" data-icon="bars">Dashboard</a>
+            <li> <a href="{{ url_for('settings', username=username) }}" data-icon="gear">Settings</a>
+            <li> <a href="{{ url_for('logout', username=username) }}" data-icon="back">Sign Out</a>
+            </ul>
+            </div>
+        </div>
+</div></div>
+</body>
+</html>

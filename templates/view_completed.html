@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="iphone.css" media="screen and (orientation:portrait)"/>
+<link rel="stylesheet" type="text/css" href="iphone_landscape.css" media="screen and (orientation:landscape)"/>-->
+<script>
+</script>
+</head>
+<body style="background-color:#5d86a1;">
+    <!-- Start of first page -->
+    <div data-role="page" style="background:none;">
+<div style="background-color:white; max-width:400px; min-width:380px; margin:auto; margin-top:10vh; padding:10px; border:3px solid black; border-radius:10px;">
+    <!-- Start of first page -->
+
+    <div data-role="header">
+    <h1>Completed Assignments</h1>
+    </div><!-- /header -->
+    <div data-role="content">
+            <div id="assignment_load">
+                <script>
+                    var duedates = [];
+                    console.log("POPULATING");
+                    var test = {{ data | safe }};
+                    for(let i = 0; i < test.length; i++){
+                      if(test[i].user == ("{{username.title()|lower}}") && test[i].completed){
+                        console.log(test[i]);
+                        duedates.push(Date.parse(test[i].due));
+                      }
+                    }
+                    duedates.sort(function(a, b) {
+                      return a - b;
+                    });
+                    let due_ind = 0;
+                    while(due_ind < duedates.length){
+                        for(let i = 0; i < test.length; i++){
+                        if(test[i].user == ("{{username.title()|lower}}")){
+                            if(Date.parse(test[i].due) == duedates[due_ind]){
+                                var out = document.createElement("DIV");
+                                out.innerHTML = "<div data-role='collapsible' data-collapsed='false' class='ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content'><h3 class='ui-collapsible-heading'>"+ test[i].assignment_name + ", due by " + test[i].due + "<span class='ui-collapsible-heading-status'>click to collapse contents</span></h3><p>" + test[i].course + "</p><p>" + test[i].notes + "</p></div>";
+                                document.getElementById("assignment_load").appendChild(out);
+                                due_ind = due_ind+1;
+                                break;
+                        }
+                      }
+                    }
+                    }
+                    console.log(duedates.length);
+                    console.log(typeof duedates[0]);
+                    console.log(duedates[0]);
+                    console.log(duedates[1]);
+                    console.log(duedates[2]);
+                </script>
+            </div>
+
+
+            <!-- Navigation buttons -->
+            <nav id="main_nav" style="padding-top:15px; margin-top:25px; padding-bottom:15px; margin-bottom:5px; border-top:5px solid gray; border-bottom:5px solid gray">
+            <!-- LI stands for list item -->
+            <a id="delete_assignment_button" data-role="button" data-icon="forbidden" href="{{ url_for('delete_assignment', username=username) }}">Delete Assignments</a>
+            </nav>
+
+        </div>
+        <div data-role="footer">
+            <div data-role="navbar">
+            <ul>
+            <li> <a href="{{ url_for('dashboard', username=username) }}" data-icon="bars">Dashboard</a>
+            <li> <a href="{{ url_for('settings', username=username) }}" data-icon="gear">Settings</a>
+            <li> <a href="{{ url_for('logout', username=username) }}" data-icon="back">Sign Out</a>
+            </ul>
+            </div>
+        </div>
+    </div>
+</div></div>
+</body>
+
+</html>

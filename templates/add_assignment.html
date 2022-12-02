@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<title>Add Assignment</title>
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="iphone.css" media="screen and (orientation:portrait)"/>
+<link rel="stylesheet" type="text/css" href="iphone_landscape.css" media="screen and (orientation:landscape)"/>-->
+</head>
+<body style="background-color:#5d86a1;">
+    <!-- Start of first page -->
+    <div data-role="page" style="background:none;">
+<div style="background-color:white; max-width:400px; min-width:380px; margin:auto; margin-top:10vh; padding:10px; border:3px solid black; border-radius:10px;">
+        <div data-role="header">
+        <h1>Add Assignment</h1>
+        </div><!-- /header -->
+        <div data-role="content">
+            <form id="add_assignment_form" method="post" action="{{ url_for('assignment_added', username=username) | safe }}">
+                Assignment Name :  <input required="true" type="text" id="assignment_name" pattern="[A-Za-z0-9,. ]+" maxlength="100" name="assignment_name" />
+                Course : <input required="true" type="text" id="course" patternmaxlength="50" pattern="[A-Za-z0-9,. ]+" name="course" />
+                Due Date : <input required="true" type="date" id="duedate" name="duedate"/>
+                Importance : <input required="true" type="range" min="1" max="10" value="5" class="slider" name="slider">
+                Additional Notes and Resources : <input type="text" id="notes" name="notes"/>
+            <input type="submit" id="submit" value="Add Assignment" />
+            </form>
+            <a id="cancel_button" data-role="button" href="{{url_for('dashboard', username=username)}}">Cancel</a>
+        </div><!-- /content -->
+        <div data-role="footer">
+            <div data-role="navbar">
+            <ul>
+            <li> <a href="{{ url_for('dashboard', username=username) }}" data-icon="bars">Dashboard</a>
+            <li> <a href="{{ url_for('settings', username=username) }}" data-icon="gear">Settings</a>
+            <li> <a href="{{ url_for('logout', username=username) }}" data-icon="back">Sign Out</a>
+            </ul>
+            </div>
+        </div>
+<script>
+    var today = new Date();
+    console.log(today.getMonth());
+    var day = today.getDate();
+    var month = today.getMonth()+1;
+    var year = today.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var date = year + "-" + month + "-" + day;
+    document.getElementById("duedate").setAttribute("min", date);
+</script></div></div>
+</body>
+</html>

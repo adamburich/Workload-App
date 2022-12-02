@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes", target-densitydpi=device-dpi />
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link rel="stylesheet" type="text/css" href='https://storage.googleapis.com/workload_static/global.css'/>
+<!--<link rel="stylesheet" type="text/css" href="iphone.css" media="screen and (orientation:portrait)"/>
+<link rel="stylesheet" type="text/css" href="iphone_landscape.css" media="screen and (orientation:landscape)"/>-->
+
+</head>
+<body style="background-color:#5d86a1;">
+    <!-- Start of first page -->
+    <div data-role="page" style="background:none;">
+
+<div class="container" style="background-color:white; max-width:400px; min-width:380px; margin:auto; padding:10px; border:3px solid black; border-radius:10px;">
+    <div data-role="header">
+    <h1 style="margin-left:5% !important; margin-right:5% !important;" id="dash_header"></h1>
+
+    </div><!-- /header -->
+    <div data-role="content">
+            <div id="assignment_load" style="height:275px; overflow-y:scroll;">
+                <h3 style="text-align:center;"> Assignments will appear here once you've added some. </h3>
+
+            </div>
+
+
+            <!-- Navigation buttons -->
+            <nav id="main_nav" style="padding-top:15px; margin-top:25px; padding-bottom:15px; margin-bottom:5px; border-top:5px solid gray; border-bottom:5px solid gray">
+            <!-- LI stands for list item -->
+            <a id="add_assignment_button" data-icon="edit" data-role="button" href="{{url_for('add_assignment', username=username)}}">Add Assignment</a>
+            <a id="delete_assignment_button" data-role="button" data-icon="forbidden" href="{{ url_for('delete_assignment', username=username) }}">Delete Assignments</a>
+            <a id="complete_assignment_button" data-role="button" data-icon="check" href="{{ url_for('complete_assignments', username=username) }}">Complete Assignments</a>
+            </nav>
+
+        </div>
+        <div data-role="footer">
+            <div data-role="navbar">
+            <ul>
+            <li> <a href="{{ url_for('dashboard', username=username) }}" data-icon="bars">Dashboard</a>
+            <li> <a href="{{ url_for('settings', username=username) }}" data-icon="gear">Settings</a>
+            <li> <a href="{{ url_for('logout', username=username) }}" data-icon="back">Sign Out</a>
+            </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+<script>
+                    var duedates = [];
+                    console.log("POPULATING");
+                    var test = {{ data | safe }};
+                    for(let i = 0; i < test.length; i++){
+                      if(test[i].user == ("{{username.title()|lower}}") && !test[i].completed){
+                        //console.log(test[i]);
+                        duedates.push(Date.parse(test[i].due));
+                      }
+                    }
+                    if(duedates.length > 0){
+                        document.getElementById("assignment_load").innerHTML = "";
+
+                    }
+                    duedates.sort(function(a, b) {
+                      return a - b;
+                    });
+                    let due_ind = 0;
+                    while(due_ind < duedates.length){
+                        for(let i = 0; i < test.length; i++){
+                        if(test[i].user == ("{{username.title()|lower}}")){
+                            //console.log(test[i]);
+                            if(Date.parse(test[i].due) == duedates[due_ind]){
+                                var imp = "Normal";
+                                if(test[i].weight < 2){
+                                    imp = "Very low";
+                                }
+                                else if(test[i].weight < 4){
+                                    imp = "Low";
+                                }
+                                else if(test[i].weight < 6){
+                                    imp = "Normal";
+                                }
+                                else if(test[i].weight < 8){
+                                    imp = "High";
+                                }
+                                else{
+                                    imp="Very High";
+                                }
+                                var out = document.createElement("DIV");
+                                out.innerHTML = "<div data-role='collapsible' data-collapsed='false' class='ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content'><h3 class='ui-collapsible-heading'>"+ test[i].assignment_name + ", due by " + test[i].due + "<span class='ui-collapsible-heading-status'>click to collapse contents</span></h3><p style='margin-top:0px; margin-bottom:0px; font-size:12px !important; float:right;'>" + imp + " importance (" + test[i].weight + ")</p><p>" + test[i].course + "</p><p>" + test[i].notes + "</p></div>";
+                                document.getElementById("assignment_load").appendChild(out);
+                                due_ind = due_ind+1;
+                                break;
+                        }
+                      }
+                    }
+                    }
+                    //console.log(duedates.length);
+                    //console.log(typeof duedates[0]);
+                    //console.log(duedates[0]);
+                    //console.log(duedates[1]);
+                    //console.log(duedates[2]);
+                </script>
+                <script>
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
+document.getElementById("dash_header").innerHTML = "Dashboard (" + today + ")";
+</script>
+</body>
+
+</html>

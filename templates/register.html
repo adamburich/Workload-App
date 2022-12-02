@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <title>Register</title>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="iphone.css" media="screen and (orientation:portrait)"/>
+<link rel="stylesheet" type="text/css" href="iphone_landscape.css" media="screen and (orientation:landscape)"/>-->
+
+</head>
+<body style="background-color:#5d86a1;">
+    <!-- Start of first page -->
+    <div data-role="page" style="background:none;">
+<div style="background-color:white; max-width:400px; min-width:380px; margin:auto; margin-top:10vh; padding:10px; border:3px solid black; border-radius:10px;">
+  <h2 style="text-align:center; margin-bottom:5px;">Workload</h2>
+  <div style="text-align:center; margin:auto; width:100%; margin-top:0; margin-bottom:50px;">
+  <img src="https://i.imgur.com/p22SPO7.png" referrerpolicy="no-referrer" >
+    </div>
+  <form id="register" action="{{ url_for('register')}}" method="post">
+    Username (May contain letters and numbers):  <input style="margin-bottom:5px;" type="text" id="username" pattern="[a-zA-Z0-9]+" maxlength="20" name="username" />
+    <br>
+    Password (Must contain at least letters and numbers): <input style="margin-bottom:5px;" type="password" id="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$" name="password" onChange="onChange()"/>
+    <br>
+    Confirm Password: <input style="margin-bottom:5px;" type="password" id="confirm_password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$" name="confirm" onChange="onChange()"/>
+    <br>
+    <input type="submit" id="submit" Value="Register" />
+  <a id="register_button" data-role="button" href="{{url_for('login')}}">I Already Have an Account</a>
+  </form>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</div>
+</div>
+  <script>
+function onChange() {
+  const password = document.querySelector('input[name=password]');
+  const confirm = document.querySelector('input[name=confirm]');
+  if (confirm.value === password.value) {
+    confirm.setCustomValidity('');
+  } else {
+    confirm.setCustomValidity('Passwords do not match');
+  }
+}
+  </script>
+</body>
+</html>

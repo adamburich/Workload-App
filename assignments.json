@@ -1,0 +1,42 @@
+[
+    {
+        "user": "acb426",
+        "assignment_name": "test assignment 1",
+        "course": "test course 1",
+        "due": "2021-08-25",
+        "weight": "5",
+        "notes": "",
+        "completed": true,
+        "DELETE": false
+    },
+    {
+        "user": "acb426",
+        "assignment_name": "test assignment 2",
+        "course": "test course 2",
+        "due": "2021-08-25",
+        "weight": "5",
+        "notes": "",
+        "completed": false,
+        "DELETE": false
+    },
+    {
+        "user": "acb426",
+        "assignment_name": "test assignment 5",
+        "course": "test course 3",
+        "due": "2021-08-24",
+        "weight": "8",
+        "notes": "",
+        "completed": false,
+        "DELETE": false
+    },
+    {
+        "user": "acb426",
+        "assignment_name": "test",
+        "course": "test",
+        "due": "2021-08-28",
+        "weight": "9",
+        "notes": "aaaaa",
+        "completed": true,
+        "DELETE": false
+    }
+]

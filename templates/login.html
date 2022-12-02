@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="iphone.css" media="screen and (orientation:portrait)"/>
+<link rel="stylesheet" type="text/css" href="iphone_landscape.css" media="screen and (orientation:landscape)"/>-->
+  <title>Login</title>
+</head>
+<body style="background-color:#5d86a1;">
+    <!-- Start of first page -->
+    <div data-role="page" style="background:none;">
+<div style="background-color:white; max-width:400px; min-width:380px; margin:auto; margin-top:10vh; padding:10px; border:3px solid black; border-radius:10px;">
+  <h2 style="text-align:center; margin-bottom:5px;">Workload</h2>
+  <div style="text-align:center; margin:auto; width:100%; margin-top:0; margin-bottom:50px;">
+  <img src="https://i.imgur.com/p22SPO7.png" referrerpolicy="no-referrer" >
+    </div>
+  <form id="login" action="{{ url_for('login')}}" method="post">
+    Username :  <input style="margin-bottom:5px;" type="text" id="username" name="username" />
+    <br>
+    Password : <input style="margin-bottom:5px;" type="password" id="password" name="password" />
+    <br>
+    <input type="submit" id="submit" value="Login"/>
+  </form>
+  <a id="register_button" data-role="button" href="{{url_for('register')}}">Register</a>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</div></div>
+</body>
+</html>
